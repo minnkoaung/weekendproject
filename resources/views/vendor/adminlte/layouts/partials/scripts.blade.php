@@ -8,3 +8,6 @@
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the
       fixed layout. -->
+
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+@stack('scripts');

@@ -31,12 +31,21 @@ class LoginController extends Controller {
 		return view('adminlte::auth.login');
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Where to redirect users after login.
 	 *
 	 * @var string
 	 */
 	protected $redirectTo = '/home';
+=======
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/backend/home';
+>>>>>>> heinhtut
 
 	/**
 	 * Create a new controller instance.

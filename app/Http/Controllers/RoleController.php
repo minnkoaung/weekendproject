@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use Datatables;
+use App\Role;
+>>>>>>> heinhtut
 
 class RoleController extends Controller
 {
@@ -14,6 +19,15 @@ class RoleController extends Controller
     public function index()
     {
         //
+<<<<<<< HEAD
+=======
+        return view("backend.role.index");
+    }
+
+    public function data() 
+    {
+        return Datatables::of(Role::query())->make(true);
+>>>>>>> heinhtut
     }
 
     /**
@@ -24,6 +38,10 @@ class RoleController extends Controller
     public function create()
     {
         //
+<<<<<<< HEAD
+=======
+        
+>>>>>>> heinhtut
     }
 
     /**
@@ -81,4 +99,8 @@ class RoleController extends Controller
     {
         //
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> heinhtut
