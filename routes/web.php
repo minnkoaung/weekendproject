@@ -9,29 +9,25 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
-Route::group(['middleware' => 'auth','prefix' => 'backend'], function () {
-    //    Route::get('/link1', function ()    {
-//        // Uses Auth Middleware
-//    });
+Route::group(['middleware' => 'auth', 'prefix' => 'backend'], function () {
+	//    Route::get('/link1', function ()    {
+	//        // Uses Auth Middleware
+	//    });
 
 	Route::get('home', 'HomeController@index')->name('home');
-	
+
 	Route::get("roles", 'RoleController@index')->name("roles.index");
 	Route::get("roles/data", 'RoleController@data')->name("roles.data");
 
-    //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
-    #adminlte_routes
+	//Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
+	#adminlte_routes
 });
-
-
-
-
 
 // Auth::routes();
 
@@ -41,8 +37,7 @@ Route::group(['middleware' => 'auth','prefix' => 'backend'], function () {
 
 // Route::group(['prefix' => 'backend'], function () {
 // 	Route::get('home', 'HomeController@index')->name('home');
-	
+
 // 	Route::get("roles", 'RoleController@index')->name("roles.index");
 // 	Route::get("roles/data", 'RoleController@data')->name("roles.data");
 // });
-
