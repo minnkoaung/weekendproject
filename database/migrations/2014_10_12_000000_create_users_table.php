@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->string("education");
+            $table->string("education")->nullable()->default('NULL');
 
             
             $table->boolean("is_super")->default(false);
