@@ -18,12 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-<<<<<<< HEAD
+
             $table->string("education");
-=======
-            $table->boolean("is_admin")->default(false);
+
+            
             $table->boolean("is_super")->default(false);
->>>>>>> 50bb81ac8db89d7672c4ae7460b27f843c24b0db
+
             $table->rememberToken();
             $table->timestamps();
         });

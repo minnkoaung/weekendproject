@@ -2,10 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-<<<<<<< HEAD
-=======
 
->>>>>>> 50bb81ac8db89d7672c4ae7460b27f843c24b0db
 class AdminSeeder extends Seeder
 {
     /**
@@ -13,19 +10,8 @@ class AdminSeeder extends Seeder
      *
      * @return void
      */
-<<<<<<< HEAD
-     public function run()
-    {
-        //
-        User::create([
-        	'name'	=> 'Super Admin',
-        	'email'	=> 'admin@myanmarlinks.net',
-        	'education'	=> '',
-        	'password'	=> bcrypt('123456'),
-        	'is_admin'	=> true
-        	]);
 
-=======
+
     public function run()
     {
         //
@@ -40,12 +26,11 @@ class AdminSeeder extends Seeder
 
         User::create([
             'name'  => 'Admin',
-            'email' => 'administrator@wpa26.org',
+            'email' => 'thanhtutoo95@gmail.com',
             'password'  => bcrypt("123456"),
             'is_admin'  => true,
             'is_super'  => false
             ]);
->>>>>>> 50bb81ac8db89d7672c4ae7460b27f843c24b0db
 
     }
 }
