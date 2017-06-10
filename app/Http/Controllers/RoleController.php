@@ -16,23 +16,23 @@ class RoleController extends Controller
     public function index()
     {
         //
-        return view("backend.role.index");
+        return view("adminlte::role.index");
     }
 
-    public function data() 
+    public function data()
     {
         return Datatables::of(Role::query())->make(true);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
+
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
-        
+        $permissions = config('role-permissions');
+        return view('adminlte::role.create', compact('permissions'));
     }
 
     /**
@@ -43,7 +43,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       echo "This is Store";
     }
 
     /**
