@@ -21,7 +21,13 @@ class RoleController extends Controller
 
     public function data()
     {
-        return Datatables::of(Role::query())->make(true);
+       $queryrole = Role::select(['id', 'name', 'slug', 'permissions']);
+        return Datatables::of($queryrole)->addColumn('option', function ($queryrole) {
+                $data = '<a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a> &nbsp;<a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                return $data;
+            })
+        ->rawColumns(['option'])
+        ->make(true);
     }
 
     /**
@@ -91,4 +97,5 @@ class RoleController extends Controller
     {
         //
     }
+
 }

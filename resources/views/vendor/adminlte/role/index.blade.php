@@ -28,6 +28,7 @@
                                         <th>Name</th>
                                         <th>Slug</th>
                                         <th>Permissions</th>
+                                        <th>Option</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -52,7 +53,8 @@
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
                 { data: 'slug', name: 'slug' },
-                { data: 'permissions', name: 'permissions' }
+                { data: 'permissions', name: 'permissions' },
+                 { data: 'option', name: 'option', orderable: false, searchable: false}
             ]
         });
     });
