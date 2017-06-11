@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'backend'], function () {
 	Route::get('home', 'HomeController@index')->name('home');
 	Route::get("roles", 'RoleController@index')->name("roles.index");
     Route::get("roles/create", 'RoleController@create')->name('roles.create');
+     Route::get("roles/edit", 'RoleController@create')->name('roles.create');
     Route::post("roles/store", 'RoleController@store')->name('roles.store');
     Route::get("roles/data", 'RoleController@data')->name("roles.data");
 

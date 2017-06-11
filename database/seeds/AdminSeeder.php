@@ -25,11 +25,11 @@ class AdminSeeder extends Seeder
         // 	]);
 
         User::create([
-            'name'  => 'Admin',
-            'email' => 'thanhtutoo95@gmail.com',
+            'name'  => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
             'password'  => bcrypt("123456"),
-            'is_admin'  => true,
-            'is_super'  => false
+            'is_admin'  => false,
+            'is_super'  => true
             ]);
 
     }

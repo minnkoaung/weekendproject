@@ -18,10 +18,21 @@ class RoleController extends Controller
         //
         return view("adminlte::role.index");
     }
+    public function getAddEditRemoveColumn()
+    {
+        return view('datatables.add-edit-remove-column');
+    }
 
     public function data()
     {
-        return Datatables::of(Role::query())->make(true);
+
+        $queryrole = Role::select(['id', 'name', 'slug', 'permissions']);
+        return Datatables::of($queryrole)->addColumn('option', function ($queryrole) {
+                $data = '<a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a><a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                return $data;
+            })
+        ->rawColumns(['option'])
+        ->make(true);
     }
 
     /**
@@ -43,7 +54,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-       echo "This is Store";
+       Role::create($request->input());
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -66,6 +78,8 @@ class RoleController extends Controller
     public function edit($id)
     {
         //
+         $role = Role::FindOrFail($id);
+        return view('adminlte::role.edit',compact('role'));
     }
 
     /**
