@@ -7,7 +7,7 @@
     <div class="container-fluid spark-screen">
         <div class="row">
             <div class="col-md-12">
-                <form method="post" action="store">
+                <form method="post" action="{{ route('roles.store') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="name">Role Name</label>
