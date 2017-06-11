@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Datatables;
+use App\User;
 use App\Role;
+use App\Http\Requests\StoreUser;
 
-class RoleController extends Controller
+class UserController extends Controller
 {
+   
     /**
      * Display a listing of the resource.
      *
@@ -16,31 +19,23 @@ class RoleController extends Controller
     public function index()
     {
         //
-        return view("adminlte::role.index");
+        return view("adminlte::user.index");
     }
-
-    public function data()
-    {
-       $queryrole = Role::select(['id', 'name', 'slug', 'permissions']);
-        return Datatables::of($queryrole)->addColumn('option', function ($queryrole) {
-                $data = '<a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a> &nbsp;<a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-                return $data;
-            })
-        ->rawColumns(['option'])
-        ->make(true);
-    }
-
     /**
      * Show the form for creating a new resource.
-
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $permissions = config('role-permissions');
-        return view('adminlte::role.create', compact('permissions'));
+        //
+        $roles = Role::select('name', 'id')->get();
+        return view("adminlte::user.create", compact("roles"));
+        
     }
-
+    public function data() {
+        return Datatables::of(User::query())->make(true);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -49,10 +44,19 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-       Role::create($request->input());
-       return redirect()->route('roles.index');
-    }
+        //
 
+      $data = [
+        'name'      => $request->input("name"),
+        'email'     => $request->input('email'),
+        'password'  => bcrypt($request->input('password')),
+        
+        ];
+        $user = User::create($data);
+        $user->roles()->attach($request->get("roles"));
+        return redirect()->route("users.index");
+
+    }
     /**
      * Display the specified resource.
      *
@@ -63,7 +67,6 @@ class RoleController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -74,7 +77,6 @@ class RoleController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -86,7 +88,6 @@ class RoleController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -97,5 +98,4 @@ class RoleController extends Controller
     {
         //
     }
-
 }

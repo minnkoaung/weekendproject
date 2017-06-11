@@ -26,6 +26,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'backend'], function () {
     Route::post("roles/store", 'RoleController@store')->name('roles.store');
     Route::get("roles/data", 'RoleController@data')->name("roles.data");
 
+
+    Route::get("users", 'UserController@index')->name("users.index");
+ 	Route::get("users/create", 'UserController@create')->name("users.create");
+ 	Route::get("users/data", 'UserController@data')->name("users.data");
+ 	Route::post('users/store', 'UserController@store')->name("users.store");
+
 	//Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
 	#adminlte_routes
 });

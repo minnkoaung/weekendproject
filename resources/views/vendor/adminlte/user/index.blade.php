@@ -10,12 +10,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-success">
-                    <div class="panel-heading">Role Management</div>
+                    <div class="panel-heading">User Management</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{ route('roles.create') }}"><button class="btn btn-success">Create Role</button></a>
-
+                            <a href="{{ route('users.create') }}"><button class="btn btn-success">Create User</button></a>
+                                
                             </div>
                         </div>
                         <br>
@@ -26,9 +26,8 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
-                                        <th>Slug</th>
-                                        <th>Permissions</th>
-                                        <th>Option</th>
+                                        <th>Email</th>
+                                        
                                     </tr>
                                     </thead>
                                 </table>
@@ -48,13 +47,13 @@
         $('#roles-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('roles.data') !!}',
+            ajax: '{!! route('users.data') !!}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
-                { data: 'slug', name: 'slug' },
-                { data: 'permissions', name: 'permissions' },
-                 { data: 'option', name: 'option', orderable: false, searchable: false}
+                { data: 'email', name: 'email' },
+                
+                
             ]
         });
     });
