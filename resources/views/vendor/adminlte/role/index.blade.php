@@ -21,7 +21,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-bordered" id="roles-table">
+                                <table class="table table-bordered table-hover" id="roles-table">
                                     <thead>
                                     <tr>
                                         <th>Id</th>
@@ -54,9 +54,13 @@
                 { data: 'name', name: 'name' },
                 { data: 'slug', name: 'slug' },
                 { data: 'permissions', name: 'permissions' },
-                 { data: 'option', name: 'option', orderable: false, searchable: false}
-            ]
+                { data: 'option', name: 'option', orderable: false, searchable: false}
+            ],
+            responsive: true
         });
     });
+
+
+
 </script>
 @endpush

@@ -29,19 +29,17 @@
                         <div class="form-group">
                             @foreach($roles as $role)
                             <label class="checkbox-inline"><input name="roles[]" type="checkbox" value="{{ $role->id }}">{{ $role->name }}</label>
-                        @endforeach 
+                        @endforeach
                         </div>
-                       
-                        
+
+
                         <div class="form-group">
 
-                            <button type="submit" class="btn btn-default">Submit</button>   
+                            <button type="submit" class="btn btn-default">Submit</button>
                         </div>
-                        
+
                         </form>
             </div>
         </div>
     </div>
 @endsection
-
-

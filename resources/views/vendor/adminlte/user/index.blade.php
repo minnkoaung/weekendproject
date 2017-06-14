@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-md-12">
                             <a href="{{ route('users.create') }}"><button class="btn btn-success">Create User</button></a>
-                                
+
                             </div>
                         </div>
                         <br>
@@ -27,7 +27,7 @@
                                         <th>Id</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        
+
                                     </tr>
                                     </thead>
                                 </table>
@@ -52,10 +52,32 @@
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
-                
-                
+
+
             ]
         });
     });
+
+    $(document).on('click', '.button', function (e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    swal({
+            title: "Are you sure!",
+            type: "error",
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes!",
+            showCancelButton: true,
+        },
+        function() {
+            $.ajax({
+                type: "POST",
+                url: "{{url('/destroy')}}",
+                data: {id:id},
+                success: function (data) {
+                              //
+                    }
+            });
+    });
+});
 </script>
 @endpush
