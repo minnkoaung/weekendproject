@@ -48,7 +48,11 @@
         $('#roles-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('roles.data') !!}',
+            ajax: {
+                    'url': '{{ route('roles.data') }}',
+                    'headers': { 'X-CSRF-TOKEN': '{{ csrf_token() }}'}
+                  },
+            // ajax: '{!! route('roles.data') !!}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },

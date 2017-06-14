@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Alert;
 use App\Role;
 use Datatables;
 use Illuminate\Http\Request;
@@ -22,28 +21,10 @@ class RoleController extends Controller {
 		$queryrole = Role::select(['id', 'name', 'slug', 'permissions']);
 		return Datatables::of($queryrole)->addColumn('option', function ($queryrole) {
 			$data = '<a href="roles/' . $queryrole->id . '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a> &nbsp;
-                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal">delete</button>
-								<!-- Modal -->
-								  <div id="myModal" class="modal fade" role="dialog">
-								    <div class="modal-dialog">
-								      <!-- Modal content-->
-								      <div class="modal-content">
-								        <div class="modal-header">
-								          <button type="button" class="close" data-dismiss="modal">&times;</button>
-								          <h4 class="modal-title">Do you really wanna delete?</h4>
-								        </div>
-								        <div class="modal-body">
-								          <p> <span class="text-danger"><b>' . $queryrole->name . '</b></span> will be delete Forever. It will not be undone.</p>
-								        </div>
-								        <div class="modal-footer">
-
-													<button class="deleteProduct btn btn-danger" data-id="'.$queryrole->id.'" data-token="{{ csrf_token() }}" >Delete</button>
-								          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								        </div>
-								      </div>
-								    </div>
-								  </div>
-
+			<form action="roles/'.$queryrole->id.'" method="post"">
+			    <input type="hidden" name="_method" value="delete">
+			    <button type="submit">Delete</button>
+			</form>
                 ';
 			return $data;
 		})
@@ -114,8 +95,9 @@ class RoleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id) {
-		$roles = Role::find($id);
-		dd($roles);
+		// $roles = Role::find($id);
+		// dd($roles);
+		dd($_SERVER);
 	}
 
 }
