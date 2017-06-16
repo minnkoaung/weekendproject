@@ -33,7 +33,7 @@
         <ul class="sidebar-menu">
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
-            <li {{{ (Request::is('backend/home') ? 'class=active' : '') }}}><a href="{{ url('backend/home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
+            <li {{{ (Request::is('backend/home') ? 'class=active' : '') }}}><a href="{{ url('backend/home') }}"><i class='fa fa-dashboard'></i> <span>{{ trans('adminlte_lang::message.dashboard') }}</span></a></li>
 
              <li {{{ (Request::is('backend/roles') ? 'class=active' : '') }}}><a href="{{ url('backend/roles') }}"><i class='fa fa-user'></i> <span>{{ trans('adminlte_lang::message.role') }}</span></a></li>
             <li {{{ (Request::is('backend/users') ? 'class=active' : '') }}}><a href="{{ url('backend/users') }}"><i class='fa fa-user'></i> <span>{{ trans('adminlte_lang::message.user') }}</span></a></li>

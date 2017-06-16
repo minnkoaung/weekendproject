@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Role;
 use Datatables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class RoleController extends Controller {
 	/**
@@ -13,7 +15,7 @@ class RoleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		return view("adminlte::role.index",compact('queryrole'));
+		return view("adminlte::role.index", compact('queryrole'));
 
 	}
 
@@ -21,7 +23,8 @@ class RoleController extends Controller {
 		$queryrole = Role::select(['id', 'name', 'slug', 'permissions']);
 		return Datatables::of($queryrole)->addColumn('option', function ($queryrole) {
 			$data = '<a href="roles/' . $queryrole->id . '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a> &nbsp;
-			<form action="roles/'.$queryrole->id.'" method="post"">
+			<form action="roles/' . $queryrole->id . '" method="post"">
+			<input type="hidden" name="_token" value="' . csrf_token() . '">
 			    <input type="hidden" name="_method" value="delete">
 			    <button type="submit">Delete</button>
 			</form>
@@ -95,9 +98,10 @@ class RoleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id) {
-		// $roles = Role::find($id);
-		// dd($roles);
-		dd($_SERVER);
+		$role_delete = Role::find($id);
+		$role_delete->delete();
+		Session::flash('message', 'Successfully deleted the Role!');
+		return redirect()->route('roles.index');
 	}
 
 }

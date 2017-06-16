@@ -54,6 +54,7 @@ return [
 	'seecode' => 'See code at',
 	'online' => 'Online',
 	'home' => 'Home',
+	'dashboard' => 'Dashboard',
 	'role' => 'User Roles',
 	'listrole' => 'List All Roles',
 	'user' => 'All Users',
