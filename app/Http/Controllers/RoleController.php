@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Datatables;
 use App\Role;
+use App\Http\Requests\StoreRole;
 
 class RoleController extends Controller
 {
@@ -13,22 +14,32 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() {
+        $this->middleware("auth");
+        //$this->middleware("is_super");
+        
+    }
     public function index()
     {
         //
         return view("adminlte::role.index");
     }
-    public function getAddEditRemoveColumn()
-    {
-        return view('datatables.add-edit-remove-column');
-    }
+   
 
     public function data()
     {
 
         $queryrole = Role::select(['id', 'name', 'slug', 'permissions']);
-        return Datatables::of($queryrole)->addColumn('option', function ($queryrole) {
-                $data = '<a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a><a href="#edit-'.$queryrole->id.'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+        return Datatables::of($queryrole)
+        ->addColumn('permissions', function ($queryrole) {
+                foreach ($queryrole->permissions as $key => $value) {
+                    # code...
+                    $data[] = $key;
+                }
+                return $data;
+            })
+        ->addColumn('option', function ($queryrole) {
+                $data = '<a href="roles/'.$queryrole->id.'/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a><a href="roles/delete/'.$queryrole->id.'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                 return $data;
             })
         ->rawColumns(['option'])
@@ -52,7 +63,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRole $request)
     {
        Role::create($request->input());
         return redirect()->route('roles.index');
@@ -78,8 +89,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         //
-         $role = Role::FindOrFail($id);
-        return view('adminlte::role.edit',compact('role'));
+        
+        $role = Role::FindOrFail($id);
+        $permissions = config('role-permissions');
+        return view('adminlte::role.edit',compact('permissions','role'));
     }
 
     /**
@@ -89,9 +102,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         //
+        Role::findOrFail($id)->update($request->all());
+        return redirect()->route('roles.index');
+        
     }
 
     /**
@@ -103,5 +119,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
+        Role::destroy($id);
+        return redirect()->route("roles.index");
     }
 }

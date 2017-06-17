@@ -4,18 +4,31 @@
     {{ trans('adminlte_lang::message.home') }}
 @endsection
 @section('main-content')
-    <div class="container-fluid spark-screen">
-        <div class="row">
+   <section class="content">
+
+      <!-- SELECT2 EXAMPLE -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Add New user</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
             <div class="col-md-12">
-                <form method="post" action="store">
+                <form method="post" action="{{route('roles.store')}}">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="name">Role Name</label>
-                        <input type="text" class='form-control' name="name" placeholder="Post Editor">
+                        <input type="text" class='form-control' name="name" placeholder="Role Name">
                     </div>
                     <div class="form-group">
                         <label for="name">Role Slug</label>
-                        <input type="text" class='form-control' name="slug" placeholder="post-editor">
+                        <input type="text" class='form-control' name="slug" placeholder="Role Slug">
                     </div>
                     <fieldset>
                         @foreach($permissions as $key => $per)
@@ -31,11 +44,23 @@
                             <br>
                         @endforeach
                     </fieldset>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
+         </div>
+          <!-- /.row -->
         </div>
-    </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          
+        </div>
+      </div>
+      <!-- /.box -->
+
+     
+      <!-- /.row -->
+
+    </section>
 @endsection
 
 

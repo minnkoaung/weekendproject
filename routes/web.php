@@ -23,9 +23,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'backend'], function () {
 	Route::get('home', 'HomeController@index')->name('home');
 	Route::get("roles", 'RoleController@index')->name("roles.index");
     Route::get("roles/create", 'RoleController@create')->name('roles.create');
-     Route::get("roles/edit", 'RoleController@create')->name('roles.create');
+    Route::get("roles/{id}/edit", 'RoleController@edit')->name('roles.edit');
+    Route::get("roles/delete/{id}", 'RoleController@destroy')->name('roles.delete');
     Route::post("roles/store", 'RoleController@store')->name('roles.store');
+    Route::patch("roles/update/{id}", 'RoleController@update')->name('roles.update');
     Route::get("roles/data", 'RoleController@data')->name("roles.data");
+
+    Route::get('users','UserController@index')->name("users.index");
+    Route::get("users/create", 'UserController@create')->name('users.create');
+    Route::get("users/data", 'UserController@data')->name("users.data");
+    Route::post("users/store",'UserController@store')->name("users.store");
+    Route::get('users/{id}/edit',"UserController@edit")->name('users.edit');
+
 
 	//Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
 	#adminlte_routes
