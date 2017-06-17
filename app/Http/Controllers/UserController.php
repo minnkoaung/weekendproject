@@ -8,6 +8,7 @@ use App\User;
 use App\Role;
 use DB;
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 
 class UserController extends Controller
 {
@@ -106,9 +107,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUser $request, $id)
     {
         //
+        $role = $request->input('roles');
+        $name  = $request->input("name");
+        $email     = $request->input('email');
+        $password  = $request->input('password');
+        
+        if(isset($password) && !empty($password)){
+            $userupdate = ['name' => $name,'email' => $email,'password'=>bcrypt($password)];
+
+        }else{
+             $userupdate = ['name' => $name,'email' => $email];
+        }
+       
+       DB::table('users')
+            ->where('id', $id)
+            ->update($userupdate);
+        
+        return redirect()->route('users.index');
     }
 
     /**
@@ -119,6 +137,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        User::destroy($id);
+        DB::table('role_users')->where('user_id',$id)->delete();
+        return redirect()->route("users.index");
         //
     }
 }

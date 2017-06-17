@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'backend'], function () {
     Route::get("users/data", 'UserController@data')->name("users.data");
     Route::post("users/store",'UserController@store')->name("users.store");
     Route::get('users/{id}/edit',"UserController@edit")->name('users.edit');
+    Route::patch('users/update/{id}',"UserController@update")->name('users.update');
+    Route::get('users/delete/{id}',"UserController@destroy")->name('users.delete');
 
 
 	//Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.

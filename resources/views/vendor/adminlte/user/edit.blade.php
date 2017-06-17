@@ -31,7 +31,7 @@
         </ul>
     </div>
 @endif
-                <form method="post" action="{{route('users.store')}}">
+                <form method="post" action="{{route('users.update',$user->id)}}">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="name">User Name</label>
@@ -51,24 +51,42 @@
                     </div>
                     <div class="form-group">
                     
-                      @foreach($roles as $role)
-                          @foreach($userole as $ur)
-                            
 
-                            @if($role->id == $ur->role_id)
+                      @foreach($userole as $ur)
+                        @php
+                          $roleuser[] = $ur->role_id
+
+                        @endphp
+
+                      @endforeach
+                        <?php $i = 0; ?>
+                      @foreach($roles as $role)
+                          
+
+                            
+                          @if(isset($roleuser[$i]))
+                            @if($role->id == $roleuser[$i] && isset($roleuser[$i]))
                             <label class="checkbox-inline"><input name="roles[]" checked="checked" type="checkbox" value="{{ $role->id }}">{{ $role->name }}</label>
                             
                             @else
                              <label class="checkbox-inline"><input name="roles[]" type="checkbox" value="{{ $role->id }}">{{ $role->name }}</label>
                              
                             @endif
-                            
-                          @endforeach
+                          @else
+                               <label class="checkbox-inline"><input name="roles[]" type="checkbox" value="{{ $role->id }}">{{ $role->name }}</label>
+                          @endif
+                           <?php $i++; ?>
+                         
                           
                       @endforeach
 
                         </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <form action="{{ route('users.store', $user->id) }}"
+                >
+                    {{ csrf_field() }}
+                    {{ method_field("patch") }}
+                    <button type="submit" class="btn btn-primary">Update User</button>
+                </form>
                 </form>
             </div>
           </div>
